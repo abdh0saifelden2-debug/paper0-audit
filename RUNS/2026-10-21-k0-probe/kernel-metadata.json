@@ -1,0 +1,15 @@
+{
+  "id": "abduk5/k1-channel-k0-probe",
+  "title": "K1 channel k0 probe",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "abduk5/k1-channel-probe-src"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

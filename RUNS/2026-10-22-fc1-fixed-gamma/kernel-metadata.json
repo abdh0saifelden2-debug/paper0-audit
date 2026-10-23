@@ -1,0 +1,13 @@
+{
+  "id": "abduk5/k1-f-c1-fixed-gamma",
+  "title": "K1 F-C1 fixed gamma",
+  "code_file": "sweep.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": ["abduk5/k1-fc1-compressible-src"],
+  "competition_sources": [],
+  "kernel_sources": []
+}

@@ -1,0 +1,110 @@
+{
+ "site": "WREF",
+ "month": "2020-01",
+ "n_clean": 602,
+ "z_minus_d": 39.730000000000004,
+ "table_rows": [
+  {
+   "class": "strongly unstable",
+   "zeta_lo": -Infinity,
+   "zeta_hi": -0.5,
+   "n": 95,
+   "median_r_uw": 0.18181592804565314,
+   "p05_r_uw": 0.04546653423265608,
+   "p95_r_uw": 0.48045329402795167,
+   "median_abs_r_wT": 0.20946455334442016,
+   "p05_abs_r_wT": 0.049770784686375726,
+   "p95_abs_r_wT": 0.6404513135043592,
+   "transport_ratio": 0.8680033215295158
+  },
+  {
+   "class": "unstable",
+   "zeta_lo": -0.5,
+   "zeta_hi": -0.1,
+   "n": 73,
+   "median_r_uw": 0.3243068199798431,
+   "p05_r_uw": 0.10028286897462152,
+   "p95_r_uw": 0.7549524544314148,
+   "median_abs_r_wT": 0.1495706408187237,
+   "p05_abs_r_wT": 0.017870461932874317,
+   "p95_abs_r_wT": 0.5607681479902266,
+   "transport_ratio": 2.1682518588183077
+  },
+  {
+   "class": "near-neutral",
+   "zeta_lo": -0.1,
+   "zeta_hi": 0.1,
+   "n": 121,
+   "median_r_uw": 0.3119634650472769,
+   "p05_r_uw": 0.15293803025211897,
+   "p95_r_uw": 0.8983786273344939,
+   "median_abs_r_wT": 0.09520386128221436,
+   "p05_abs_r_wT": 0.0069112840431129734,
+   "p95_abs_r_wT": 0.3578807719754431,
+   "transport_ratio": 3.276794248108472
+  },
+  {
+   "class": "stable",
+   "zeta_lo": 0.1,
+   "zeta_hi": 0.5,
+   "n": 153,
+   "median_r_uw": 0.2253980353707718,
+   "p05_r_uw": 0.11807270010223424,
+   "p95_r_uw": 0.5599248320418726,
+   "median_abs_r_wT": 0.19991292174024966,
+   "p05_abs_r_wT": 0.05808079204553467,
+   "p95_abs_r_wT": 0.3877456427640807,
+   "transport_ratio": 1.1274810723022466
+  },
+  {
+   "class": "strongly stable",
+   "zeta_lo": 0.5,
+   "zeta_hi": Infinity,
+   "n": 160,
+   "median_r_uw": 0.15599140552592577,
+   "p05_r_uw": 0.04350377990768603,
+   "p95_r_uw": 0.4826678796281802,
+   "median_abs_r_wT": 0.20324563685317792,
+   "p05_abs_r_wT": 0.06730491837393288,
+   "p95_abs_r_wT": 0.48279026950905657,
+   "transport_ratio": 0.7675018659249842
+  }
+ ],
+ "summary_mismatches": [],
+ "artifact_winter": {
+  "data_dir": "NEON.D16.WREF.DP4.00200.001.nsae.2020-01.basic.20260115T205811Z.h5",
+  "site": "WREF",
+  "month": "2020-01",
+  "n_intervals": 1488,
+  "n_valid_pressure": 1097,
+  "n_valid_temperature": 1180,
+  "temp_diurnal_period_h": 23.635408852213054,
+  "temp_semidiurnal_period_h": 12.065266316579145,
+  "temp_semi_over_diurnal_power": 0.07273211392160779,
+  "pres_diurnal_period_h": 23.158289572393098,
+  "pres_semidiurnal_period_h": 12.184546136534134,
+  "pres_semi_over_diurnal_power": 0.20749175309771256,
+  "pres_dominant_period_h": 120.96774193548387,
+  "temp_dominant_period_h": 60.49287321830458,
+  "pearson_r": 0.07144161975083015,
+  "r_squared": 0.005103905032622216,
+  "slope_kpa_per_k": 0.01416073161253163,
+  "gaslaw_slope_kpa_per_k": 0.3526768737654465,
+  "transport_ratio_by_class": {
+   "strongly unstable": 0.8680033215295158,
+   "unstable": 2.1682518588183077,
+   "near-neutral": 3.276794248108472,
+   "stable": 1.1274810723022466,
+   "strongly stable": 0.7675018659249842
+  },
+  "class_counts": {
+   "strongly unstable": 95,
+   "unstable": 73,
+   "near-neutral": 121,
+   "stable": 153,
+   "strongly stable": 160
+  },
+  "transport_ratio_swing": 4.269428380033081
+ },
+ "summer_entry_unchanged": true
+}

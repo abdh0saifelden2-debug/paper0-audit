@@ -1,0 +1,3 @@
+/tmp/opencode/kaggle-venv/bin/kaggle datasets create -p /tmp/opencode/k1-fc2-unitary-src --dir-mode zip
+/tmp/opencode/kaggle-venv/bin/kaggle kernels push -p /tmp/opencode/k1-fc2-unitary
+/tmp/opencode/kaggle-venv/bin/kaggle kernels output abduk5/k1-f-c2-unitary -p /tmp/opencode/k1-fc2-out3

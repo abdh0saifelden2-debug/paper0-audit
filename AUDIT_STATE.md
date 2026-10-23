@@ -1,0 +1,52 @@
+# Audit State
+
+- Audited repo: `/home/manem/Downloads/K1-two-clocks-theory`
+- Base commit: `e178c55`
+- Base tag: `paper0-v1.0`
+- Released commit: `3e98346`
+- Released tag: `paper0-v1.0.1`
+- Current phase: v1.0.1 released and CI-green; audit repository published with the `release-gate/` snapshot
+- Completed: 54 / 54 core tests (ledger complete; 54 test cards)
+- Static module/script sweep: complete enough for report; remaining questions are dynamic
+- Static findings: F-C1–F-C20 (see `notes/static-findings.md`)
+- Claim map: updated with evidence and statuses; `REPORT.md` written
+- Dynamic run 1: F-C20 k=0 wall probe complete; cleared for tested scope (`RUNS/2026-10-21-k0-probe/`)
+- Dynamic run 2: F-C1 fixed-gamma sweep complete; `gamma∝c` gives the claimed slope, fixed gamma does not (`RUNS/2026-10-22-fc1-fixed-gamma/`)
+- Dynamic run 3: F-C2 common-phase control complete; cross-spectrum-preserving surrogate still fails divergence (`RUNS/2026-10-22-fc2-unitary/`)
+- Dynamic run 4: F-C15 raw NEON winter rerun complete (`RUNS/2026-10-23-fc15-neon/`)
+  - source: WREF `2020-01`, `DP4.00200.001` basic, `RELEASE-2026`, MD5 `8e7621c78be196cb1991f1dd1eca64c8`, `153,801,332` bytes
+  - `602` usable periods; z-d `39.73 m`
+  - `±0.5` reproduces the paper table exactly: counts `95/73/121/153/160`; ratios `0.8680/2.1683/3.2768/1.1275/0.7675`; swing `4.2694`
+  - true `±1.0` counts `51/117/121/228/85`; ratios `0.6613/1.7607/3.2768/1.1086/0.5820`; swing `5.6306`; Option A was invalid
+  - printed brackets were not actual 5–95% ranges; table now uses actual 5–95% values
+  - winter artifact regenerated at `±0.5`/`39.73`; summer artifact unchanged (one-month data limit)
+- Release edits applied and released in `3e98346` (`paper0-v1.0.1`):
+  - F-C1 abstract/§3.1/kill-table reframing;
+  - F-C2 common-phase control paragraph;
+  - O6 coherence corrections at both locations;
+  - R3 “approximately 15% (maximum 15.5%)”;
+  - F-C4 same-level restriction;
+  - F-C15 bin edges are `-0.5, -0.1, 0.1, 0.5`; the inner edges are `±0.1`, not `±0.05` (the latter would change counts); table row labels/footnote corrected to `±0.5`, caption says “medians with measured 5–95% ranges,” brackets replaced with actual 5–95% values, `±1.0` robustness parenthetical added (`5.6x`; counts `51/117/121/228/85`), winter artifact regenerated, `REPORT_NEON_SEASONS.md` winter swing `4.3x`;
+  - `run_neon_compare.py` now uses the site z-d instead of a hard-coded `39.7`;
+  - CI/dependency fixes (`numpy>=2.0`, no `|| true`, `pytest==8.3.5`).
+- F-C15 is resolved for the paper table; no July rerun is required. Residual: summer artifact remains the prior `±0.5` artifact at z-d `39.7` and was not raw-verified.
+- Process note: F-C15 is the second label/prose falsification of correct code (first: the `0.168/0.480` mapping). The recurring failure mode is textual, not numerical.
+- Claim-map gate implemented in the target: `CLAIM_MAP.md`, `claims/fc15_winter.json`, `tools/check_claim_map.py`, and a `Lint claim map` CI step. The gate is CI-green (3 checks passed).
+- Release verification:
+  - PR #4: claim-map lint 3 checks passed; pytest `683 passed, 1 skipped`; paper build/PDF check passed.
+  - Main CI `40021028585`: green in `6m36s`.
+  - Tag `paper0-v1.0.1`: Paper workflow built and published the release PDF; PDF SHA-256 `f06630066e9c6d6e514e0f41c0b845c3cdac977c48ae7c4b5303117391c63d31` (`2,357,558` bytes).
+  - First CI run failed on O6 `0.4645` formatting at three decimals; the checker now compares printed values numerically, and the fix was squashed into `3e98346`.
+  - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.1
+- Audit repository: https://github.com/abdh0saifelden2-debug/paper0-audit
+- Next task: post-release submission checks; no audit-release blocker remains.
+- Open verification gaps: F-C17/F-C18/F-C19, F-C3, raw-backed O1–O9 beyond the winter F-C15 rerun.
+  - NEON, RB, ASOS, and reanalysis caches are not in the repo.
+  - RB full ensemble is 342 GB; individual files are ~8.4 GB.
+  - `run_closure3d.py` needs CUDA/CuPy; GPU run not configured yet.
+- Dynamic runner: Kaggle CLI at `/tmp/opencode/kaggle-venv/bin/kaggle`; datasets `abduk5/k1-channel-probe-src`, `abduk5/k1-fc1-compressible-src`, `abduk5/k1-fc2-unitary-src`, `abduk5/k1-fc15-winter-src`; kernels `k1-channel-k0-probe` v6, `k1-f-c1-fixed-gamma` v2, `k1-f-c2-unitary` v3, `k1-fc15-winter` v6, `k1-fc15-bins` v4
+- Data available: committed JSON/PNG artifacts plus the F-C15 run outputs; no raw NEON/ASOS/RB caches
+- Token handling: the NEON token was used only in a private ephemeral Kaggle dataset; that dataset and the local token copy were deleted after the run
+- Correction: the coarse `±1.0` swing is `5.6306` (`5.6x`), not `5.7373`; the paper parenthetical and all audit references were corrected. Recomputing `3.276794 / 0.581958` is the gate check.
+- Post-release follow-ups: replace URL citations with the Zenodo DOI when minted; read the final PDF aloud once.
+- Last updated: 2026-10-23

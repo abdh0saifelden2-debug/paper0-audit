@@ -1,0 +1,4 @@
+runner: Kaggle kernel abduk5/k1-f-c1-fixed-gamma v2 (CPU, no internet)
+python: 3.13.15
+numpy: 2.1.3
+platform: Linux-6.18.48+-x86_64-with-glibc2.39

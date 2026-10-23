@@ -1,0 +1,4 @@
+repo=K1-two-clocks-theory
+commit=e178c55
+path=closure/channel3d.py
+sha256=9d58e1cbdf72566136c4a5cdab455a590965c899a82f601571656ed199723f51

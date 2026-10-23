@@ -1,0 +1,13 @@
+{
+  "id": "abduk5/k1-f-c2-unitary",
+  "title": "K1 F-C2 unitary",
+  "code_file": "fc2_unitary.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": ["abduk5/k1-fc2-unitary-src"],
+  "competition_sources": [],
+  "kernel_sources": []
+}
