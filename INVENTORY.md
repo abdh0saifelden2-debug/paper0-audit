@@ -6,8 +6,8 @@
 - Base commit: `e178c55`
 - Base tag: `paper0-v1.0`
 - Base release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0`
-- Released audit target: `3e98346`, tag `paper0-v1.0.1`
-- Current release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.1`
+- Released audit target: `239aff9`, tag `paper0-v1.0.2`
+- Current release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2`
 - Working tree at audit start: clean, `main...origin/main`
 - Split audit: 451 traced files, 448 byte-identical, 3 modified, 1 new; 78 test files in the split (3 relocated to K2).
 
@@ -136,6 +136,7 @@
 - `figures/09b_asos_ci.json`: 8-station amplitude ladder and CIs.
 - `figures/15b_rb_ra_sweep.json`: `lambda_ratio_median` 2.40 at Ra=1e6; high-k medians 636 / 21809 / 46253.
 - `figures/24_spde_limit_ensemble.json`: n=100; rms_proj=2.26e-15; rms_surr_median=0.03692; corr_abs_median=0.0697.
+- `figures/24b_spde_common_phase.json`: common-phase F-C2 control; `div_star_rms=0.0274581`, `div_surrogate_rms=0.0366233`, ratio `1.33379`, cross-spectrum error `2.1393e-16`, projection `2.2245e-15`; lint-gated in v1.0.2.
 - `figures/27b_reanalysis_crosscheck.json`: max_rel_diff=0.15458.
 - `figures/65_closure3d.json`: div truth=1.05e-14, surrogate=9.85; transfer corr projected-FDT=0.999722.
 - `figures/77_closure3d_bounded.json`: commutator periodic=3.06e-16, channel=0.02256; wall_div_full=0.00971.

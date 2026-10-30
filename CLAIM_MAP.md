@@ -2,9 +2,9 @@
 
 Audited repository: `/home/manem/Downloads/K1-two-clocks-theory`
 Base commit: `e178c55` (`paper0-v1.0`)
-Released audit target: `3e98346` (`paper0-v1.0.1`), CI-green
+Released audit target: `239aff9` (`paper0-v1.0.2`), CI-green
 Manuscript: `paper0_two_clocks.tex`
-Status values describe the base commit unless marked “fixed in v1.0.1”: `OPEN`, `SUPPORTED`, `PARTIAL`, `UNSUPPORTED`, `CONTRADICTED`, `UNVERIFIED`.
+Status values describe the base commit unless marked “fixed in v1.0.1” or “fixed in v1.0.2”: `OPEN`, `SUPPORTED`, `PARTIAL`, `UNSUPPORTED`, `CONTRADICTED`, `UNVERIFIED`.
 
 Status meaning:
 - `SUPPORTED`: claim matches both the committed artifact and an independent/generative check.
@@ -21,7 +21,7 @@ Status meaning:
 | O3 | Winter bulk daily P-T correlation is +0.07 | L74 | `run_analysis.py` | `neon_pt.analysis` | `tests/test_neon_seasonal.py::test_winter_matches_paper_headlines` (artifact only) | `figures/01b_neon_seasonal.json` | PARTIAL |
 | O4 | Summer semidiurnal/diurnal temperature ratio drops 7.3% to 1.0%; pressure dominant 11.9 h at 8.5%; r=-0.49; pressure dominant 168 h; slope -0.024 vs +0.334 kPa/K | L76 | `run_neon_compare.py` | `neon_pt.analysis`, `neon_pt.stability` | `tests/test_neon_seasonal.py` (artifact only) | `figures/01b_neon_seasonal.json` | PARTIAL |
 | O5 | ASOS 8 stations 24.6-47.4 N; semidiurnal pressure amplitude 1.10 to 0.34 hPa, monotonic; Haurwitz trend r=0.98; ratios 0.9-1.4 | L81-107 | `asos/fetch_iem.py && run_asos_ci.py` | `asos/loader.py`, `run_asos_ci.py` | `tests/test_asos_ci.py` (artifact only) | `figures/09b_asos_ci.json`, `figures/11b_tide_vs_latitude_ci.png` | PARTIAL |
-| O6 | P-T coherence 0.82-0.98 at 24/12 h; 0.09-0.30 off-line; daily r -0.56 to -0.05 | L87, L111-113 | `run_asos_ci.py` | `run_asos_ci.py` | `tests/test_asos_ci.py` (artifact only; S1 untested) | `figures/09b_asos_ci.json` | CONTRADICTED at v1.0 for S1; S2 supported; fixed in v1.0.1 |
+| O6 | P-T coherence 0.82-0.98 at 24/12 h; 0.09-0.30 off-line; daily r -0.56 to -0.05 | L87, L111-113 | `run_asos_ci.py` | `run_asos_ci.py` | `tests/test_asos_ci.py` (artifact only; S1 untested) | `figures/09b_asos_ci.json` | CONTRADICTED at v1.0 for S1; S2 supported; S1 fixed in v1.0.1; off-line fixed and lint-gated in v1.0.2 |
 | O7 | RB: L_b=0.195, L_p=0.207, ratio 1.06; lambda_b=0.253, lambda_p=0.607, ratio 2.40; high-k power ratio ~1e4 at k~10 | L129-143 | `run_rb.py` | `run_rb.py` | No direct test; `tests/test_rb_ra_sweep.py` only checks the 2.40 artifact anchor | `figures/13_rb_fields.png`, `15_rb_spectra.png` | UNVERIFIED |
 | O8 | Ra sweep: lambda ratio 2.58/2.94/4.45; L ratio 1.02/1.25/1.75; high-k gap widens ~70x | L148-160 | `run_rb_ra_sweep.py` | `run_rb_ra_sweep.py`, `run_rb.py` | `tests/test_rb_ra_sweep.py` (artifact only) | `figures/15b_rb_ra_sweep.json` | PARTIAL |
 | O9 | Stability transport ratio swings 4.3x in winter (0.77-3.28) and 5.9x in summer (0.44-2.60); n=602/1030 | L167-181 | `run_stability.py` | `neon_pt.stability` | `tests/test_stability.py` helper tests only | `figures/12_stability_bins.png`, `figures/01b_neon_seasonal.json` | PARTIAL |
@@ -74,10 +74,12 @@ Status meaning:
 
 ## Release Resolution
 
-- `paper0-v1.0.1` (`3e98346`) fixes O6, F-C15, and R3; adds the F-C1/F-C2/F-C4 wording restrictions; and pins the CI dependencies.
-- Claim-map lint: 3 checks passed. Pytest: `683 passed, 1 skipped`. Main CI `40021028585` green; tag workflow `40021921986` published the PDF.
-- The gate is deliberately narrow: it covers the F-C15 table/swing/robustness, O6, and R3. F-C1, F-C2, and F-C4 are reviewed prose, not artifact-gated.
-- The first CI run failed on O6 `0.4645` formatting (`0.464` vs paper `0.465`); the final checker compares printed values numerically.
+- `paper0-v1.0.1` (`3e98346`) fixed O6, F-C15, and R3; added the F-C1/F-C2/F-C4 wording restrictions; and pinned the CI dependencies.
+- `paper0-v1.0.2` (`239aff9`) closes the seven submission-review items: bibliography separator, off-line coherence, Fig. 14 caption, F-C2 evidence/lint, F-C9 disclosure, reproducibility/SHA cosmetics, and the `±1.0` swing review.
+- Claim-map lint: 5 checks passed. Pytest: `683 passed, 1 skipped`. PR #5 CI `40027964422`/`40027964234`; PR #6 CI `41037093654`/`41037093652`; main CI `41037934023` green; tag workflow `41038812908` published the PDF.
+- The gate now covers the F-C15 table/swing/robustness, O6 off-line values, F-C2 common-phase control, manuscript disclosures, and R3. F-C1 and F-C4 remain reviewed prose, not artifact-gated.
+- The first v1.0.1 CI run failed on O6 `0.4645` formatting (`0.464` vs paper `0.465`); the final checker compares printed values numerically.
+- The first v1.0.2 PDF clipped the archive SHA-256 at the right margin; PR #6 moved it to its own line and `pdftotext` now recovers all 64 characters.
 
 ## Evidence Notes
 
@@ -88,9 +90,9 @@ Status meaning:
 - O7/M2: no machine-readable JSON and no direct paper0 test; values are report/PNG-level only.
 - O10: `REPORT_ELLIPTIC_PRESSURE.md:23` reports 79%; `far_fraction` uses `r>0.6` while `sigma=0.18`, so “one source width” is not the literal threshold (F-C10).
 - M1: `tests/test_compressible.py:39,57-67` sets `gamma=1.5*c/L` for every `c`; the test only asserts `t90(16)<t90(4)`. Dynamic F-C1 (`RUNS/2026-10-22-fc1-fixed-gamma/`): proportional `t90=2.2782 L/c`, R² `1.0`; fixed gamma 12/48 gives OLS slopes `0.158/0.267` with nonzero intercepts and no through-origin scaling. The claimed slope/collapse are imposed by the damping convention (F-C1).
-- S1/S2: `rms_proj=2.26e-15`, surrogate `rms=0.03692` `[0.03479,0.03839]`, `median|r|=0.06972`, `p95=0.19814`, `n=100`; the input divergence is dynamically `2.7458e-2`, projection `2.225e-15`. The paper surrogate reproduces `3.7565e-2`; a common-phase surrogate preserving scalar and cross-spectra exactly (`rel_err=0.0`) still gives `3.6623e-2` (`1.33x` drift). The claim survives, but the paper should add this control and attribute failure to phase alignment, not cross-spectrum alone (F-C2).
+- S1/S2: `rms_proj=2.26e-15`, surrogate `rms=0.03692` `[0.03479,0.03839]`, `median|r|=0.06972`, `p95=0.19814`, `n=100`; the input divergence is dynamically `2.7458e-2`, projection `2.225e-15`. The paper surrogate reproduces `3.7565e-2`; a common-phase surrogate preserving scalar and cross-spectra exactly (`rel_err=0.0`) still gives `3.6623e-2` (`1.33x` drift). The claim survives; the paper now includes this control and attributes failure to phase alignment, not cross-spectrum alone (F-C2). The control is committed as `figures/24b_spde_common_phase.json` and gated by the v1.0.2 claim-map lint.
 - S3: artifact `true_projected_div`/`projected_fdt_div` are machine-small; `transfer_corrs.Smagorinsky=-0.6415`; alignment `0.47855/0.65358/0.32543`; backscatter `0.48015`; structural tests do not read the artifact. Alignment test lacks the e2-ordering assertion (F-C17); fixture is 32³/300 vs 128³/2500 artifact (F-C18); Smagorinsky test is sign-only (F-C19).
-- S4: artifact `wall_div_interior=8.5356e-15`, `wall_div_full=0.0097097`, `wall_no_penetration=6.233e-15`, `wall_idempotency=5.137e-15`, `fourier_no_penetration=0.51318`, `input_div=1.9248`, `input_no_pen=0.79324`; commutator `periodic=3.0596e-16`, `channel=0.022558`, ratio `7.37e13`; near/bulk `33.81`, peak `0`. The k=0 gauge bottom-wall concern (F-C20) was cleared dynamically: six pure-k=0 profiles give wall residual at most `1.42e-14`, and a dual-wall reference agrees to `3.06e-14` (`RUNS/2026-10-21-k0-probe/`). The filter cutoffs remain in different units (F-C9), and the CI test still does not isolate k=0.
+- S4: artifact `wall_div_interior=8.5356e-15`, `wall_div_full=0.0097097`, `wall_no_penetration=6.233e-15`, `wall_idempotency=5.137e-15`, `fourier_no_penetration=0.51318`, `input_div=1.9248`, `input_no_pen=0.79324`; commutator `periodic=3.0596e-16`, `channel=0.022558`, ratio `7.37e13`; near/bulk `33.81`, peak `0`. The k=0 gauge bottom-wall concern (F-C20) was cleared dynamically: six pure-k=0 profiles give wall residual at most `1.42e-14`, and a dual-wall reference agrees to `3.06e-14` (`RUNS/2026-10-21-k0-probe/`). F-C9 is closed as a documented limitation: the filter cutoffs remain in different units and the paper now discloses that the ratio is a fixed-cutoff order-of-magnitude contrast, not a bandwidth-matched calibration; the qualitative near-wall localization remains supported. The CI test still does not isolate k=0.
 - R1/R2/R4: `REPORT_REANALYSIS.md` gives R1 `3.99/0.67/1.04%`, R2 `4.47/0.77/1.13%`, minimum at 500 hPa; R4 only checks 500 hPa (`0.67%` daily vs `1.12%` 6-hourly). No direct level/spectrum test. Confirmed static: daily is 24 daily means (24 days), inst is 24 six-hourly snapshots (6 days), and only 500 hPa is compared; “at every level” is unsupported (F-C4).
 - R3: artifact `max_rel_diff=0.154581` (15.46%), with per-level `11.84/15.46/8.19%`; paper says 15% or less; test asserts `<0.30` (F-C5).
 - F1-F4: pinned Lean stamp `553d5c2`; CI run `39588479578` succeeded; `STATEMENT_MATCH.md:346-356` maps §2b. This is a separate formal repo; no local recheck and no Python-test coverage.

@@ -690,11 +690,11 @@
 - Oracle: structural.
 - What the test asserts: `rwall>1e-3`; `rwall>1e6*rper`.
 - Counterfactual: the comparison uses `fourier_filter(kc_y=NY_KEEP)` with a wavenumber cutoff and `sharp_filter(ny_keep=NY_KEEP)` with a DCT mode count; the filters have different effective bandwidths (F-C9). Artifact channel 0.02256, periodic 3.06e-16, ratio 7.37e13.
-- Dynamic check: matched effective cutoff; sweep.
-- Verdict: PASS (qualitative), confounded by cutoff units.
-- Severity: S2; see F-C9.
+- Dynamic check: none in v1.0.2; no matched-bandwidth sweep was run.
+- Verdict: PASS (qualitative); cutoff-unit mismatch closed as a documented limitation.
+- Severity: S2; F-C9 disclosed in the paper.
 - Evidence: `tests/test_channel3d.py:85-92`; artifact `ratio=7.37e13`.
-- Next action: matched-bandwidth sweep.
+- Next action: none for v1.0.2; matched-bandwidth sweep remains an optional stronger check.
 
 ## T052 — test_commutator_is_wall_localized
 
@@ -717,10 +717,10 @@
 - What the test asserts: no horizontal Fourier energy above `KC_H` (threshold 1e-10).
 - Counterfactual: the vertical DCT cutoff is not tested; `NY_KEEP` is a mode count, not a wavenumber (F-C9). Artifact/test only checks horizontal.
 - Dynamic check: test vertical DCT mode count and boundary derivative.
-- Verdict: PASS (horizontal only).
+- Verdict: PASS (horizontal only); F-C9 closed as a documented limitation in v1.0.2.
 - Severity: S2; see F-C9.
 - Evidence: `tests/test_channel3d.py:110-115`; `closure/channel3d.py:221-232`.
-- Next action: vertical band-limit test.
+- Next action: vertical band-limit test remains an optional coverage improvement.
 
 ## T054 — test_reproducible
 

@@ -1,6 +1,6 @@
 # Static Findings — Paper0
 
-Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2026-10-21/22); F-C15 raw winter check completed 2026-10-23. Each finding has a code/artifact anchor and, where possible, a per-test ledger row. F-C14–F-C20 are later additions and are numbered by discovery order, not severity; F-C20 was cleared by `RUNS/2026-10-21-k0-probe/`. Release fixes are in `3e98346` / `paper0-v1.0.1`.
+Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2026-10-21/22); F-C15 raw winter check completed 2026-10-23. Each finding has a code/artifact anchor and, where possible, a per-test ledger row. F-C14–F-C20 are later additions and are numbered by discovery order, not severity; F-C20 was cleared by `RUNS/2026-10-21-k0-probe/`. Release fixes are in `3e98346` / `paper0-v1.0.1` and `239aff9` / `paper0-v1.0.2`.
 
 ## F-C1 Compressible damping confounds the t90 scaling (reframed in v1.0.1)
 
@@ -12,7 +12,7 @@ Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2
 - Dynamic result (`RUNS/2026-10-22-fc1-fixed-gamma/`): proportional damping gives `t90=2.2782 L/c` (R² `1.0`, collapse spread `0.0`). Fixed `gamma=12` gives `t90=0.270-0.303` for `c=4-32` (OLS slope `0.158`, intercept `0.264`; through-origin R² negative); fixed `gamma=48` gives `0.071-0.128` (slope `0.267`, intercept `0.061`). The 10% threshold is damping-controlled; the `2.3 L/c` law is not convention-independent.
 - Severity: S1 confirmed; the paper must disclose the fixed-damping-per-crossing convention and cannot present the slope as an emergent law.
 
-## F-C2 Boussinesq surrogate destroys vector cross-spectrum by construction (control added in v1.0.1)
+## F-C2 Boussinesq surrogate destroys vector cross-spectrum by construction (control committed in v1.0.2)
 
 - Target: `run_boussinesq.py:148-149,166-167`; `closure/sgs.py:158`; `closure/sgs3d.py:150`
 - Observation: `phase_randomized(sp, ud, seed=11)` and `phase_randomized(sp, vd, seed=12)` use independent random phases for the two velocity components. The docstring says the surrogate matches `E_m(k)` but is not projected, so divergence is nonzero.
@@ -20,7 +20,7 @@ Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2
 - Test: `tests/test_spde_limit_ensemble.py` checks the committed artifact; `tests/test_closure3d.py::test_surrogate_breaks_solenoidality` checks only that divergence is large.
 - Decisive check: build a surrogate that preserves the vector cross-spectrum (e.g., randomize a common phase or rotate the vector field coherently) and compare divergence; measure cross-spectrum preservation directly.
 - Dynamic result (`RUNS/2026-10-22-fc2-unitary/`): at `n=128,t=6`, `div(u*)=2.7458e-2`; the paper surrogate gives `3.7565e-2` (reproduces the reported `3.76e-2`); a common-phase surrogate preserving scalar spectra and the component cross-spectrum of `(ud,vd)` exactly (`rel_err≈2e-16`) gives `3.6623e-2` (`1.33x` drift); projection is `2.225e-15`. Global/k-dependent unitary rotations preserve vector energy but not the component cross-spectrum and are reported only as controls.
-- Interpretation: for the gradient correction the spectral matrix is rank one, so an exact cross-spectrum-preserving randomization is a common phase; the surrogate remains parallel to the gradient and cannot cancel the drift's divergence. The high-level “energy yes, structure no” claim survives; the paper should add the common-phase control and attribute failure to phase alignment with the drift, not cross-spectrum loss alone.
+- Interpretation: for the gradient correction the spectral matrix is rank one, so an exact cross-spectrum-preserving randomization is a common phase; the surrogate remains parallel to the gradient and cannot cancel the drift's divergence. The high-level “energy yes, structure no” claim survives; v1.0.2 commits the common-phase control as `figures/24b_spde_common_phase.json`, gates `3.66e-2`/`2.75e-2`/`1.33x`/`2e-16`/`2.2e-15`, and attributes failure to phase alignment with the drift, not cross-spectrum loss alone.
 - Severity: S1 for the writeup/interpretation; not a refutation of the high-level claim.
 
 ## F-C3 RB high-k ratio is computed from peak-normalized spectra
@@ -114,13 +114,14 @@ Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2
 - Decisive check: compare `T_smag` to `-2<nu_t |S|²>` and to `T_true`; report the correlation and amplitude ratio.
 - Candidate severity: S3 for coverage.
 
-## F-C9 Channel filter cutoff units are inconsistent
+## F-C9 Channel filter cutoff units are inconsistent (closed as documented limitation)
 
 - Target: `closure/channel3d.py`
 - Observation: `_dct_lowpass_y` uses a mode count (`ny_keep`), while `fourier_filter` uses `kc_y=ny_keep` as a wavenumber cutoff. The commutator comparison may compare filters with different effective cutoffs.
 - Why it matters: the headline commutator ratio and near-wall localization could depend on the cutoff convention. The qualitative wall effect may survive.
 - Decisive check: sweep cutoff definitions at matched effective bandwidth; compare commutator and localization.
-- Candidate severity: S2.
+- Disposition (v1.0.2, 2026-10-30): **CLOSED as a documented limitation, not numerically resolved.** No matched-bandwidth sweep was run. The paper footnote now states that the channel ratio uses the test's fixed cutoffs and is an order-of-magnitude contrast, not a bandwidth-matched calibration. The qualitative near-wall localization (`near/bulk=33.81`, `peak=0`) remains the supported feature.
+- Severity: S2; disclosed limitation, not a submission blocker.
 
 ## F-C10 Elliptic far-field label is imprecise
 

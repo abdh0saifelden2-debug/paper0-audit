@@ -3,9 +3,9 @@
 - Audited repo: `/home/manem/Downloads/K1-two-clocks-theory`
 - Base commit: `e178c55`
 - Base tag: `paper0-v1.0`
-- Released commit: `3e98346`
-- Released tag: `paper0-v1.0.1`
-- Current phase: v1.0.1 released and CI-green; audit repository published with the `release-gate/` snapshot
+- Released commit: `239aff9`
+- Released tag: `paper0-v1.0.2`
+- Current phase: v1.0.2 released and CI-green; audit repository updated with the v1.0.2 `release-gate/` snapshot
 - Completed: 54 / 54 core tests (ledger complete; 54 test cards)
 - Static module/script sweep: complete enough for report; remaining questions are dynamic
 - Static findings: F-C1–F-C20 (see `notes/static-findings.md`)
@@ -31,13 +31,24 @@
   - CI/dependency fixes (`numpy>=2.0`, no `|| true`, `pytest==8.3.5`).
 - F-C15 is resolved for the paper table; no July rerun is required. Residual: summer artifact remains the prior `±0.5` artifact at z-d `39.7` and was not raw-verified.
 - Process note: F-C15 is the second label/prose falsification of correct code (first: the `0.168/0.480` mapping). The recurring failure mode is textual, not numerical.
-- Claim-map gate implemented in the target: `CLAIM_MAP.md`, `claims/fc15_winter.json`, `tools/check_claim_map.py`, and a `Lint claim map` CI step. The gate is CI-green (3 checks passed).
+- Claim-map gate implemented in the target: `CLAIM_MAP.md`, `claims/fc15_winter.json`, `tools/check_claim_map.py`, and a `Lint claim map` CI step. The gate is CI-green (5 checks passed in v1.0.2).
 - Release verification:
   - PR #4: claim-map lint 3 checks passed; pytest `683 passed, 1 skipped`; paper build/PDF check passed.
   - Main CI `40021028585`: green in `6m36s`.
   - Tag `paper0-v1.0.1`: Paper workflow built and published the release PDF; PDF SHA-256 `f06630066e9c6d6e514e0f41c0b845c3cdac977c48ae7c4b5303117391c63d31` (`2,357,558` bytes).
   - First CI run failed on O6 `0.4645` formatting at three decimals; the checker now compares printed values numerically, and the fix was squashed into `3e98346`.
   - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.1
+- v1.0.2 submission-review release (`239aff9`, `paper0-v1.0.2`):
+  - PR #5 fixed the seven review items; PR #6 moved the archive SHA-256 to a copyable one-line form after the first v1.0.2 PDF clipped it at the margin.
+  - Off-line coherence now reads `0.09–0.30`, at or below the surrogate floor at four of eight stations, within `0.12` at the rest; gated by lint.
+  - Fig. 14 caption now calls the daily/6-hourly comparison a same-level consistency check, not a clean all-level low-pass comparison.
+  - F-C2 common-phase control committed as `figures/24b_spde_common_phase.json`; gated values `3.66e-2`, `2.75e-2`, `1.33x`, `2e-16`, `2.2e-15`.
+  - F-C9 closed as a documented limitation: the paper now discloses the fixed-cutoff, non-bandwidth-matched channel ratio; no matched-bandwidth sweep was run.
+  - Coarse `±1.0` swing remains `5.6x`: `3.2767942481 / 0.5819575731 = 5.6306411318`. The review's `5.74x` is not supported by the committed artifact; the earlier `5.7373` was already a slip.
+  - PR #5 CI `40027964422` / `40027964234`: lint 5 checks passed, pytest `683 passed, 1 skipped`, PDF built.
+  - Main CI `41037934023`: green in `6m33s`; Paper run `41037934080`: green.
+  - Tag run `41038812908`: build and release green. PDF SHA-256 `1b336d631bcf92ea896718d2882782f3a81cb58db3374fb3b09cc9dde794616a` (`2,358,357` bytes, 24 pages).
+  - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2
 - Audit repository: https://github.com/abdh0saifelden2-debug/paper0-audit
 - Next task: post-release submission checks; no audit-release blocker remains.
 - Open verification gaps: F-C17/F-C18/F-C19, F-C3, raw-backed O1–O9 beyond the winter F-C15 rerun.
@@ -47,6 +58,7 @@
 - Dynamic runner: Kaggle CLI at `/tmp/opencode/kaggle-venv/bin/kaggle`; datasets `abduk5/k1-channel-probe-src`, `abduk5/k1-fc1-compressible-src`, `abduk5/k1-fc2-unitary-src`, `abduk5/k1-fc15-winter-src`; kernels `k1-channel-k0-probe` v6, `k1-f-c1-fixed-gamma` v2, `k1-f-c2-unitary` v3, `k1-fc15-winter` v6, `k1-fc15-bins` v4
 - Data available: committed JSON/PNG artifacts plus the F-C15 run outputs; no raw NEON/ASOS/RB caches
 - Token handling: the NEON token was used only in a private ephemeral Kaggle dataset; that dataset and the local token copy were deleted after the run
-- Correction: the coarse `±1.0` swing is `5.6306` (`5.6x`), not `5.7373`; the paper parenthetical and all audit references were corrected. Recomputing `3.276794 / 0.581958` is the gate check.
+- Correction: the coarse `±1.0` swing is `5.6306` (`5.6x`), not `5.7373` and not `5.74`; the paper parenthetical and all audit references were corrected. Recomputing `3.276794 / 0.581958` is the gate check.
+- F-C9 is closed as a documented limitation (v1.0.2); no matched-bandwidth sweep was run. See `notes/static-findings.md`, `REPORT.md`, and the paper footnote.
 - Post-release follow-ups: replace URL citations with the Zenodo DOI when minted; read the final PDF aloud once.
-- Last updated: 2026-10-23
+- Last updated: 2026-10-30
