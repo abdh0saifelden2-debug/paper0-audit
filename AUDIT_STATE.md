@@ -3,9 +3,9 @@
 - Audited repo: `/home/manem/Downloads/K1-two-clocks-theory`
 - Base commit: `e178c55`
 - Base tag: `paper0-v1.0`
-- Released commit: `239aff9`
-- Released tag: `paper0-v1.0.2`
-- Current phase: v1.0.2 released and CI-green; audit repository updated with the v1.0.2 `release-gate/` snapshot
+- Released commit: `a0b6a45`
+- Released tag: `paper0-v1.0.3`
+- Current phase: v1.0.3 released and CI-green; audit repository updated with the v1.0.3 `release-gate/` snapshot
 - Completed: 54 / 54 core tests (ledger complete; 54 test cards)
 - Static module/script sweep: complete enough for report; remaining questions are dynamic
 - Static findings: F-C1–F-C20 (see `notes/static-findings.md`)
@@ -31,7 +31,7 @@
   - CI/dependency fixes (`numpy>=2.0`, no `|| true`, `pytest==8.3.5`).
 - F-C15 is resolved for the paper table; no July rerun is required. Residual: summer artifact remains the prior `±0.5` artifact at z-d `39.7` and was not raw-verified.
 - Process note: F-C15 is the second label/prose falsification of correct code (first: the `0.168/0.480` mapping). The recurring failure mode is textual, not numerical.
-- Claim-map gate implemented in the target: `CLAIM_MAP.md`, `claims/fc15_winter.json`, `tools/check_claim_map.py`, and a `Lint claim map` CI step. The gate is CI-green (5 checks passed in v1.0.2).
+- Claim-map gate implemented in the target: `CLAIM_MAP.md`, `claims/fc15_winter.json`, `tools/check_claim_map.py`, and a `Lint claim map` CI step. The gate is CI-green (5 checks passed in v1.0.2 and v1.0.3).
 - Release verification:
   - PR #4: claim-map lint 3 checks passed; pytest `683 passed, 1 skipped`; paper build/PDF check passed.
   - Main CI `40021028585`: green in `6m36s`.
@@ -49,6 +49,15 @@
   - Main CI `41037934023`: green in `6m33s`; Paper run `41037934080`: green.
   - Tag run `41038812908`: build and release green. PDF SHA-256 `1b336d631bcf92ea896718d2882782f3a81cb58db3374fb3b09cc9dde794616a` (`2,358,357` bytes, 24 pages).
   - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2
+- v1.0.3 read-aloud layout release (`a0b6a45`, `paper0-v1.0.3`):
+  - Table 8's E4 row was clipped at the page edge in v1.0.2 (150.6 pt overfull; `pdftotext` recovered `c-depen`). The second column is now `p{0.60\linewidth}` and the row reads `... c-dependent final state`.
+  - The F-C9 footnote split across pages, stranding “calibration.” on page 17. The caveat is now in the body.
+  - The pre-table coherence paragraph duplicated the band-resolved paragraph and said “collapses to the surrogate noise floor”; it was removed, and the band-resolved paragraph now carries the exact gated `0.09–0.30` sentence.
+  - The Paper workflow now installs `poppler-utils` and checks the built PDF for `final state` and the full archive SHA-256.
+  - PR #7 CI `41040231759` / `41040231804`: lint 5 checks, pytest `683 passed, 1 skipped`, PDF text gate passed.
+  - Main CI `41040989300`: green in `6m23s`; Paper main `41040989285`: green; tag workflow `41041824992`: build and release green.
+  - Released PDF: `2,357,555` bytes, 24 pages, SHA-256 `03e629b145dd6fbbf47b98488fbcd25fd1f3ca2f400691998149bbdc6865e9e4`; no word reaches the 612 pt page edge.
+  - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.3
 - Audit repository: https://github.com/abdh0saifelden2-debug/paper0-audit
 - Next task: post-release submission checks; no audit-release blocker remains.
 - Open verification gaps: F-C17/F-C18/F-C19, F-C3, raw-backed O1–O9 beyond the winter F-C15 rerun.
@@ -59,6 +68,6 @@
 - Data available: committed JSON/PNG artifacts plus the F-C15 run outputs; no raw NEON/ASOS/RB caches
 - Token handling: the NEON token was used only in a private ephemeral Kaggle dataset; that dataset and the local token copy were deleted after the run
 - Correction: the coarse `±1.0` swing is `5.6306` (`5.6x`), not `5.7373` and not `5.74`; the paper parenthetical and all audit references were corrected. Recomputing `3.276794 / 0.581958` is the gate check.
-- F-C9 is closed as a documented limitation (v1.0.2); no matched-bandwidth sweep was run. See `notes/static-findings.md`, `REPORT.md`, and the paper footnote.
+- F-C9 is closed as a documented limitation (v1.0.2); no matched-bandwidth sweep was run. See `notes/static-findings.md`, `REPORT.md`, and the paper text (v1.0.3 moved the disclosure out of a footnote that split across pages).
 - Post-release follow-ups: replace URL citations with the Zenodo DOI when minted; read the final PDF aloud once.
 - Last updated: 2026-10-30

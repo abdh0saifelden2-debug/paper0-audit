@@ -1,6 +1,6 @@
 # Static Findings — Paper0
 
-Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2026-10-21/22); F-C15 raw winter check completed 2026-10-23. Each finding has a code/artifact anchor and, where possible, a per-test ledger row. F-C14–F-C20 are later additions and are numbered by discovery order, not severity; F-C20 was cleared by `RUNS/2026-10-21-k0-probe/`. Release fixes are in `3e98346` / `paper0-v1.0.1` and `239aff9` / `paper0-v1.0.2`.
+Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2026-10-21/22); F-C15 raw winter check completed 2026-10-23. Each finding has a code/artifact anchor and, where possible, a per-test ledger row. F-C14–F-C20 are later additions and are numbered by discovery order, not severity; F-C20 was cleared by `RUNS/2026-10-21-k0-probe/`. Release fixes are in `3e98346` / `paper0-v1.0.1`, `239aff9` / `paper0-v1.0.2`, and `a0b6a45` / `paper0-v1.0.3`.
 
 ## F-C1 Compressible damping confounds the t90 scaling (reframed in v1.0.1)
 
@@ -120,7 +120,7 @@ Status: static sweep complete; dynamic checks F-C20, F-C1, and F-C2 completed (2
 - Observation: `_dct_lowpass_y` uses a mode count (`ny_keep`), while `fourier_filter` uses `kc_y=ny_keep` as a wavenumber cutoff. The commutator comparison may compare filters with different effective cutoffs.
 - Why it matters: the headline commutator ratio and near-wall localization could depend on the cutoff convention. The qualitative wall effect may survive.
 - Decisive check: sweep cutoff definitions at matched effective bandwidth; compare commutator and localization.
-- Disposition (v1.0.2, 2026-10-30): **CLOSED as a documented limitation, not numerically resolved.** No matched-bandwidth sweep was run. The paper footnote now states that the channel ratio uses the test's fixed cutoffs and is an order-of-magnitude contrast, not a bandwidth-matched calibration. The qualitative near-wall localization (`near/bulk=33.81`, `peak=0`) remains the supported feature.
+- Disposition (v1.0.2, 2026-10-30): **CLOSED as a documented limitation, not numerically resolved.** No matched-bandwidth sweep was run. The paper now states in the text that the channel ratio uses the test's fixed cutoffs and is an order-of-magnitude contrast, not a bandwidth-matched calibration (v1.0.3 moved this out of a footnote that split across pages). The qualitative near-wall localization (`near/bulk=33.81`, `peak=0`) remains the supported feature.
 - Severity: S2; disclosed limitation, not a submission blocker.
 
 ## F-C10 Elliptic far-field label is imprecise

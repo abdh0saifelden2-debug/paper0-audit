@@ -2,7 +2,7 @@
 
 Audited repository: `/home/manem/Downloads/K1-two-clocks-theory`
 Base commit: `e178c55` (`paper0-v1.0`)
-Released audit target: `239aff9` (`paper0-v1.0.2`), CI-green
+Released audit target: `a0b6a45` (`paper0-v1.0.3`), CI-green
 Manuscript: `paper0_two_clocks.tex`
 Status values describe the base commit unless marked “fixed in v1.0.1” or “fixed in v1.0.2”: `OPEN`, `SUPPORTED`, `PARTIAL`, `UNSUPPORTED`, `CONTRADICTED`, `UNVERIFIED`.
 
@@ -76,7 +76,9 @@ Status meaning:
 
 - `paper0-v1.0.1` (`3e98346`) fixed O6, F-C15, and R3; added the F-C1/F-C2/F-C4 wording restrictions; and pinned the CI dependencies.
 - `paper0-v1.0.2` (`239aff9`) closes the seven submission-review items: bibliography separator, off-line coherence, Fig. 14 caption, F-C2 evidence/lint, F-C9 disclosure, reproducibility/SHA cosmetics, and the `±1.0` swing review.
-- Claim-map lint: 5 checks passed. Pytest: `683 passed, 1 skipped`. PR #5 CI `40027964422`/`40027964234`; PR #6 CI `41037093654`/`41037093652`; main CI `41037934023` green; tag workflow `41038812908` published the PDF.
+- v1.0.2 claim-map lint: 5 checks passed. Pytest: `683 passed, 1 skipped`. PR #5 CI `40027964422`/`40027964234`; PR #6 CI `41037093654`/`41037093652`; main CI `41037934023` green; tag workflow `41038812908` published the PDF.
+- `paper0-v1.0.3` (`a0b6a45`) is a layout-only release from the v1.0.2 read-aloud: Table 8's clipped E4 row now wraps, the split F-C9 footnote is inlined, and the duplicate pre-table coherence paragraph is removed. No claim or number changed. The Paper workflow now gates the built PDF text for `final state` and the archive SHA-256.
+- v1.0.3 claim-map lint: 5 checks passed; pytest `683 passed, 1 skipped`; PR #7 CI `41040231759`/`41040231804`; main CI `41040989300` green in `6m23s`; tag workflow `41041824992` published the PDF. SHA-256 `03e629b145dd6fbbf47b98488fbcd25fd1f3ca2f400691998149bbdc6865e9e4` (`2,357,555` bytes, 24 pages).
 - The gate now covers the F-C15 table/swing/robustness, O6 off-line values, F-C2 common-phase control, manuscript disclosures, and R3. F-C1 and F-C4 remain reviewed prose, not artifact-gated.
 - The first v1.0.1 CI run failed on O6 `0.4645` formatting (`0.464` vs paper `0.465`); the final checker compares printed values numerically.
 - The first v1.0.2 PDF clipped the archive SHA-256 at the right margin; PR #6 moved it to its own line and `pdftotext` now recovers all 64 characters.

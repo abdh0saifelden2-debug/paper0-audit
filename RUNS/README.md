@@ -32,3 +32,4 @@ Completed runs:
 - `2026-10-22-fc2-unitary/` — F-C2 independent-phase vs common-phase/unitary controls; Kaggle CPU. See its `README.md`.
 - `2026-10-23-fc15-neon/` — F-C15 raw WREF 2020-01 rerun, `±0.5` vs true `±1.0`, and actual 5–95% ranges; Kaggle CPU. See its `README.md`.
 - `2026-10-30-v1.0.2-release/` — released v1.0.2 PDF, hash/size ledger, and `pdftotext` checks. See its `README.md`.
+- `2026-10-30-v1.0.3-release/` — released v1.0.3 PDF, hash/size ledger, and layout/text checks. See its `README.md`.

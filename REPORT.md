@@ -1,11 +1,11 @@
 # Paper0 Code and Test Audit
 
-Status: static audit complete; dynamic F-C20, F-C1, F-C2, and F-C15 checks complete; v1.0.2 released at `239aff9` / `paper0-v1.0.2`.
+Status: static audit complete; dynamic F-C20, F-C1, F-C2, and F-C15 checks complete; v1.0.3 released at `a0b6a45` / `paper0-v1.0.3`.
 
 ## Executive Summary
 
 - Audited base: `/home/manem/Downloads/K1-two-clocks-theory`, commit `e178c55`, tag `paper0-v1.0`.
-- Released audit target: commit `239aff9`, tag `paper0-v1.0.2`; CI-green at https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2. v1.0.2 supersedes v1.0.1 (`3e98346`).
+- Released audit target: commit `a0b6a45`, tag `paper0-v1.0.3`; CI-green at https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.3. v1.0.3 supersedes v1.0.2 (`239aff9`), which supersedes v1.0.1 (`3e98346`).
 - 54/54 core paper0 tests reviewed across 10 test files. The ledger has no `OPEN` rows; 54 test cards exist.
 - No project code, test, build, or data job was executed locally. Test verdicts are static code/artifact reviews unless marked as a dynamic probe (F-C20 k=0, F-C1, F-C2, or F-C15); no project pytest was run.
 - The suite is green-looking but is not strong validation: 19/54 tests are artifact-only, several central claims have no test, and multiple tests assert properties enforced by construction.
@@ -14,7 +14,7 @@ Status: static audit complete; dynamic F-C20, F-C1, F-C2, and F-C15 checks compl
   2. **F-C15** (fixed in v1.0.1): the paper table labels said `±1.0`, but the values are `±0.5`. A raw WREF `2020-01` rerun reproduces the table exactly at `±0.5` (`95/73/121/153/160`; ratios `0.8680/2.1683/3.2768/1.1275/0.7675`; swing `4.2694`); true `±1.0` gives `51/117/121/228/85` and swing `5.6306`. The printed brackets were also not actual 5–95% ranges; they have been replaced with the measured values. The paper now adds the binning-robustness parenthetical: at coarser `±1.0` boundaries the winter swing is `5.6x` (counts `51/117/121/228/85`). While wiring the gate, the coarse swing was recomputed from `fc15_bins.json` as `5.6306`, correcting the earlier `5.7373` label. See `RUNS/2026-10-23-fc15-neon/`.
   3. **R3** (fixed in v1.0.1): the paper said R1/R2 differences are “15% or less”; `max_rel_diff=0.154581` (15.46%), and the test threshold is 30%. The text now says “approximately 15% (maximum 15.5%).”
 - **v1.0.2 submission review** closes seven items: the missing bibliography separator; the off-line coherence contradiction; the Fig. 14 low-pass overclaim; the F-C2 prose-only evidence; F-C9; the reproducibility/SHA/duplicate-word cosmetics; and the coarse `±1.0` swing review. The swing remains `5.6x` because the committed artifact gives `3.2767942481 / 0.5819575731 = 5.6306411318`; `5.74x` is not supported. The claim gate now has 5 checks, including F-C2 and the off-line values.
-- **Process note:** F-C15 is the second time a label/prose layer falsified what the code computed correctly (the first was the `0.168/0.480` mapping). The recurring failure mode is the text that describes the numerics, not the numerics; the claim-map lint gate is now in the target and CI and was green for `paper0-v1.0.1` and `paper0-v1.0.2`.
+- **Process note:** F-C15 is the second time a label/prose layer falsified what the code computed correctly (the first was the `0.168/0.480` mapping). The recurring failure mode is the text that describes the numerics, not the numerics; the claim-map lint gate is now in the target and CI and was green for `paper0-v1.0.1`, `paper0-v1.0.2`, and `paper0-v1.0.3`.
 - **F-C20 is cleared** for the tested k=0 scope by `RUNS/2026-10-21-k0-probe/`: six pure-k=0 profiles, including pure bottom/top modes and nonzero walls at both ends, give wall residuals at most `1.42e-14`; a dual-wall reference agrees to `3.06e-14`; the ny sweep gives at most `1.23e-14`. The remaining issue is that CI does not isolate k=0.
 - **F-C1 is confirmed dynamically**: proportional damping gives `t90 = 2.2782 L/c` with R² `1.0`; holding `gamma` fixed makes `t90` nearly independent of `c` (gamma=12: OLS slope `0.158`, intercept `0.264`; gamma=48: slope `0.267`, intercept `0.061`; both through-origin fits fail). The `2.3 L/c` law is imposed by `gamma=1.5c/L`, not a convention-independent adjustment-time law. See `RUNS/2026-10-22-fc1-fixed-gamma/`.
 - **F-C2 is a writeup issue, not a refutation after the control**: the paper surrogate reproduces `3.76e-2`; a common-phase surrogate preserves the scalar spectra and component cross-spectrum of `(ud,vd)` exactly (`rel_err≈2e-16`) and still leaves `3.66e-2` residual divergence vs `2.75e-2` uncorrected (`1.33x`; projection `2.2e-15`). The conclusion survives; v1.0.2 commits the control as `figures/24b_spde_common_phase.json` and gates it, and the text attributes failure to phase alignment, not cross-spectrum alone. See `RUNS/2026-10-22-fc2-unitary/`.
@@ -80,7 +80,7 @@ Artifact `max_rel_diff=0.154581` (15.46%); per-level `11.84/15.46/8.19%`. The pa
 `closure/sgs3d.py:209` uses `resid = max(E_true[k]-E_par[k], 0)`. If the parallel part overshoots, the residual is zero and the total force spectrum need not match `E_m(k)`. The 0.9997 transfer correlation may be a construction artifact; the test only requires `>0.6`.
 
 **F-C9. Channel filter cutoff units are inconsistent (closed as documented limitation).**
-`sharp_filter` uses a DCT mode count `ny_keep`; `fourier_filter` uses `kc_y=float(ny_keep)` as a Fourier wavenumber, so the commutator comparison uses different cutoff conventions. The qualitative wall effect is independently supported by the near-wall localization (near/bulk `33.81`, peak `0`), but the exact ratio is not a bandwidth-matched calibration. The paper now discloses this in a footnote; the audit records it as a documented limitation rather than a resolved numerical check. No matched-bandwidth sweep was run.
+`sharp_filter` uses a DCT mode count `ny_keep`; `fourier_filter` uses `kc_y=float(ny_keep)` as a Fourier wavenumber, so the commutator comparison uses different cutoff conventions. The qualitative wall effect is independently supported by the near-wall localization (near/bulk `33.81`, peak `0`), but the exact ratio is not a bandwidth-matched calibration. The paper now discloses this in the text (v1.0.3 moved it out of a footnote that split across pages); the audit records it as a documented limitation rather than a resolved numerical check. No matched-bandwidth sweep was run.
 
 **F-C3. RB high-k ratio is peak-normalized and measured at a different band.**
 `run_rb.py:141-142` and `run_rb_ra_sweep.py:61-62` divide each spectrum by its own maximum. The paper's `~1e4` and `~70x` widening are shape ratios, not absolute power ratios; the sweep averages `k >= kmax/sqrt(10)` (~12.9 for `nx=512`), not `k~10`. State both raw and normalized ratios.
@@ -150,7 +150,7 @@ Pending, in priority order; all execution belongs on Kaggle/CI, not this laptop:
 - Data-backed recomputation for NEON, ASOS, RB, and reanalysis.
 - Full Lean proof audit; only pinned statement-scope mapping and CI status were checked.
 - Paper1 and non-paper0 claims.
-- The v1.0.1 release commit was CI-built and tagged; no project pytest was run locally. The audit did not independently rerun the full suite or rebuild the PDF. The same applies to v1.0.2: CI built the PDF, and the released asset was only read and hashed locally.
+- The v1.0.1 release commit was CI-built and tagged; no project pytest was run locally. The audit did not independently rerun the full suite or rebuild the PDF. The same applies to v1.0.2 and v1.0.3: CI built the PDF, and the released asset was only read and hashed locally.
 - No matched-bandwidth channel sweep; F-C9 is disclosed, not resolved.
 
 ## Release Outcome
@@ -169,6 +169,17 @@ Pending, in priority order; all execution belongs on Kaggle/CI, not this laptop:
 - Released asset: `2,358,357` bytes, 24 pages, SHA-256 `1b336d631bcf92ea896718d2882782f3a81cb58db3374fb3b09cc9dde794616a` (identical to the GitHub asset digest). `pdftotext` recovers the full 64-character archive digest on one line.
 - Off-line coherence is stated as `0.09–0.30`, at or below the surrogate floor at four of eight stations and within `0.12` elsewhere; Fig. 14 is a same-level consistency check; F-C9 is a disclosed limitation. The coarse `±1.0` swing stays `5.6×`; `5.74×` is not supported by `fc15_bins.json`.
 - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2
+
+### v1.0.3
+
+- `paper0-v1.0.3` was released from `a0b6a45` on 2026-10-30, superseding v1.0.2 (`239aff9`; older tags left unmoved). A read-aloud of the released v1.0.2 PDF found three defects that the source lint could not see.
+- Table 8's E4 row was clipped: the `ll` tabular ran 150.6 pt past the margin and `pdftotext` recovered only `... converges with a c-depen`. The second column is now `p{0.60\linewidth}`; the row reads `... c-dependent final state`.
+- The F-C9 footnote split across pages and stranded “calibration.” alone at the bottom of page 17. The caveat is now in the body.
+- The pre-table coherence paragraph duplicated the band-resolved paragraph and said coherence “collapses to the surrogate noise floor”; it was removed, and the band-resolved paragraph now carries the exact gated `0.09–0.30` sentence.
+- The Paper workflow now installs `poppler-utils` and gates the built PDF for `final state` and the full 64-character archive SHA-256.
+- PR #7 CI `41040231759` / `41040231804`; main CI `41040989300` green in `6m23s`; Paper main `41040989285` green; tag workflow `41041824992` green.
+- Released asset: `2,357,555` bytes, 24 pages, SHA-256 `03e629b145dd6fbbf47b98488fbcd25fd1f3ca2f400691998149bbdc6865e9e4` (identical to the GitHub asset digest). `pdftotext -bbox` finds no word reaching the 612 pt page edge.
+- Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.3
 
 ## Appendices
 

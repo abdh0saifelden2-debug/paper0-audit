@@ -6,8 +6,8 @@
 - Base commit: `e178c55`
 - Base tag: `paper0-v1.0`
 - Base release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0`
-- Released audit target: `239aff9`, tag `paper0-v1.0.2`
-- Current release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.2`
+- Released audit target: `a0b6a45`, tag `paper0-v1.0.3`
+- Current release: `https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.3`
 - Working tree at audit start: clean, `main...origin/main`
 - Split audit: 451 traced files, 448 byte-identical, 3 modified, 1 new; 78 test files in the split (3 relocated to K2).
 

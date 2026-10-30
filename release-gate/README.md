@@ -1,7 +1,8 @@
 # Release gate snapshot
 
-Snapshot of the `paper0-v1.0.2` claim-map gate from
-`K1-two-clocks-theory` commit `239aff9`.
+Snapshot of the `paper0-v1.0.3` claim-map gate from
+`K1-two-clocks-theory` commit `a0b6a45`. The gate files are unchanged from
+v1.0.2; v1.0.3 is a layout-only release.
 
 ## Contents
 
@@ -34,7 +35,7 @@ The vendored script differs from upstream only in how it locates the target
 checkout: it reads `PAPER0_ROOT` and otherwise defaults to a sibling
 `K1-two-clocks-theory` directory. The checks are unchanged.
 
-The target checkout must be at `paper0-v1.0.2` (`239aff9`) or a commit with the
+The target checkout must be at `paper0-v1.0.3` (`a0b6a45`) or a commit with the
 same checked files. The gate reads the target's paper, `REPORT_STABILITY.md`,
 `neon_pt/stability.py`, `figures/01b_neon_seasonal.json`,
 `figures/09b_asos_ci.json`, `figures/24b_spde_common_phase.json`,
@@ -42,14 +43,16 @@ same checked files. The gate reads the target's paper, `REPORT_STABILITY.md`,
 
 ## Verified result
 
-The upstream gate ran in CI for PR #5 and PR #6 and on `main`:
+The upstream gate ran in CI for PR #5, PR #6, and PR #7 and on `main`:
 
 - claim-map lint: 5 checks passed;
 - pytest: `683 passed, 1 skipped`;
 - paper build and PDF check: passed;
+- v1.0.3 adds a PDF text gate: `final state` and the full archive SHA-256 must
+  survive `pdftotext`;
 - released PDF SHA-256:
-  `1b336d631bcf92ea896718d2882782f3a81cb58db3374fb3b09cc9dde794616a`
-  (`2,358,357` bytes, 24 pages).
+  `03e629b145dd6fbbf47b98488fbcd25fd1f3ca2f400691998149bbdc6865e9e4`
+  (`2,357,555` bytes, 24 pages).
 
 The gate covers F-C15 table/swing/robustness, O6 (including off-line coherence),
 F-C2 common-phase control, manuscript disclosures, and R3. F-C1 and F-C4 are
