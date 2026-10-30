@@ -16,7 +16,8 @@ Text and layout checks with `pdftotext`:
 - off-line coherence sentence present once, `0.09–0.30` at four of eight;
 - archive digest recovered on one line:
   `SHA-256: ef637ff5f912a5d1404f677429f9429eccc8102a8cab23cee79cf055bbf1220`;
-- `pdftotext -bbox`: no word reaches the 612 pt page edge.
+- `pdftotext -bbox`: no word reaches the 612 pt page edge;
+- full read-aloud completed 2026-10-30: no new text or layout defects.
 
 The PDF was downloaded for reading and hashing only. No project code, test,
 build, or data job was run locally.

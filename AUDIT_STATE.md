@@ -57,6 +57,7 @@
   - PR #7 CI `41040231759` / `41040231804`: lint 5 checks, pytest `683 passed, 1 skipped`, PDF text gate passed.
   - Main CI `41040989300`: green in `6m23s`; Paper main `41040989285`: green; tag workflow `41041824992`: build and release green.
   - Released PDF: `2,357,555` bytes, 24 pages, SHA-256 `03e629b145dd6fbbf47b98488fbcd25fd1f3ca2f400691998149bbdc6865e9e4`; no word reaches the 612 pt page edge.
+  - Full read-aloud of the released v1.0.3 PDF completed 2026-10-30: no new text or layout defects.
   - Release: https://github.com/abdh0saifelden2-debug/K1-two-clocks-theory/releases/tag/paper0-v1.0.3
 - Audit repository: https://github.com/abdh0saifelden2-debug/paper0-audit
 - Next task: post-release submission checks; no audit-release blocker remains.
@@ -69,5 +70,5 @@
 - Token handling: the NEON token was used only in a private ephemeral Kaggle dataset; that dataset and the local token copy were deleted after the run
 - Correction: the coarse `±1.0` swing is `5.6306` (`5.6x`), not `5.7373` and not `5.74`; the paper parenthetical and all audit references were corrected. Recomputing `3.276794 / 0.581958` is the gate check.
 - F-C9 is closed as a documented limitation (v1.0.2); no matched-bandwidth sweep was run. See `notes/static-findings.md`, `REPORT.md`, and the paper text (v1.0.3 moved the disclosure out of a footnote that split across pages).
-- Post-release follow-ups: replace URL citations with the Zenodo DOI when minted; read the final PDF aloud once.
+- Post-release follow-ups: the released v1.0.3 PDF was read aloud in full on 2026-10-30 (no new defects); replace URL citations with the Zenodo DOI when minted. No Zenodo record exists yet (API search, 2026-10-30).
 - Last updated: 2026-10-30
